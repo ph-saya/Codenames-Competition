@@ -1,4 +1,7 @@
 import random
+import nltk
+
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from demo_bot import RandomBot
 """TODO[2]: Import your bot from demo_bot."""
