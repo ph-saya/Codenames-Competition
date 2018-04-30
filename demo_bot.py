@@ -62,3 +62,11 @@ class RandomBot(SpyBot):
 
 
 """TODO[1]: implement your bot here that inherits from SpyBot"""
+class DumbBot(SpyBot):
+
+    def __init__(self, vocab, game_board, p_id):
+        self.vocab = set(vocab)
+
+
+    def getClue(self, invalid_words):
+        return ('hello' ,1)
