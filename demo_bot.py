@@ -1,5 +1,8 @@
 import random
 
+import nltk
+nltk.download('wordnet')
+from utils import hello
 
 class SpyBot(object):
     """
@@ -69,4 +72,53 @@ class DumbBot(SpyBot):
 
 
     def getClue(self, invalid_words):
-        return ('hello' ,1)
+        return ('dumb' ,1)
+
+
+class Paul(SpyBot):
+    """ """
+
+    def __init__(self, vocab, game_board, p_id):
+        # permanent structures
+        self.vocab = set(vocab)
+        self.words = game_board
+        self.p_id = p_id
+
+        # mutable structures  
+        self.my_words = set()
+        self.their_words = set()
+        self.bad_word = ''
+        self.given_words = set()
+
+        # Sort words
+        for word, team in game_board.items():
+            if team == p_id:
+                self.my_words.add(word)
+                continue
+            elif team == (1 - p_id):
+                self.their_words.add(word)
+                continue
+            elif team == 3:
+                self.bad_word = word
+   
+ 
+    def update(self, is_my_turn, clue_word, clue_num_guesses, guesses):
+ 
+        # Ensure representation of relevant words is updated 
+        guess_set = {guess for guess in guesses}
+        self.my_words -= guess_set     
+        self.their_words -= guess_set
+
+        self.given_words.add(clue_word)
+        print(give_words)
+    
+
+    def getClue(self, invalid_words):
+        mind_word = random.sample(self.my_words, 1)
+        print(mind_word)
+
+        # TODO remove   
+        print(self.my_words)
+        print
+        return ('paul' ,1)
+

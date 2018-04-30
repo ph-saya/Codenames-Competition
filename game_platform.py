@@ -4,7 +4,7 @@ nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from demo_bot import RandomBot
 """TODO[2]: Import your bot from demo_bot."""
-from demo_bot import DumbBot
+from demo_bot import DumbBot, Paul
 
 GAME_WORDS_FILEPATH = "data/game_words.txt"
 VOCAB_FILEPATH = "data/vocab.txt"
@@ -195,7 +195,7 @@ class Codenames(object):
 
 if __name__ == '__main__':
     """TODO[3]: Specify your bot here, in place of RandomBot."""
-    one_player = RandomBot
+    one_player = Paul
     two_player = DumbBot
     print('Player 1 is ' + str(one_player))
     print('Player 2 is ' + str(two_player))
