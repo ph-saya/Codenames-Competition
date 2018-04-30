@@ -7,6 +7,7 @@ class SpyBot(object):
     give a clue to the guesser or be updated about moves made in the game.
     """
 
+
     def __init__(self, vocab, game_board, p_id):
         """
         Initialization for the bot
@@ -19,6 +20,11 @@ class SpyBot(object):
         """
         pass
 
+    
+    def __str__(self):
+        return self.__class__
+
+    
     def update(self, is_my_turn, clue_word, clue_num_guesses, guesses):
         """
         Informs the bot with what happened during a turn.
@@ -29,6 +35,7 @@ class SpyBot(object):
             guesses: (List<string>): list of words that were guessed in the round.
         """
         pass
+
 
     def getClue(self, invalid_words):
         """
@@ -43,14 +50,15 @@ class SpyBot(object):
         pass
 
 
-# example of how to write a bot
+# Example of how to write a bot
 class RandomBot(SpyBot):
 
     def __init__(self, vocab, game_board, p_id):
         self.vocab = set(vocab)
 
+
     def getClue(self, invalid_words):
-        return random.choice(list(self.vocab.difference(invalid_words))), 2
+        return (random.choice(list(self.vocab.difference(invalid_words))), 2)
 
 
 """TODO[1]: implement your bot here that inherits from SpyBot"""

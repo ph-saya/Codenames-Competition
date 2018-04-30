@@ -1,6 +1,5 @@
 import random
 import nltk
-
 nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from demo_bot import RandomBot
@@ -195,6 +194,10 @@ class Codenames(object):
 
 if __name__ == '__main__':
     """TODO[3]: Specify your bot here, in place of RandomBot."""
-    game = Codenames(RandomBot, RandomBot)
+    one_player = RandomBot
+    two_player = RandomBot
+    print('Player 1 is ' + one_player)
+    print('Player 2 is ' + two_player)
+    game = Codenames(one_player, two_player)
     game.run()
 
