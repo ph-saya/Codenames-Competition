@@ -1,8 +1,8 @@
 import random
+import sys
 
-import nltk
-nltk.download('wordnet')
-from utils import hello
+from nltk.corpus import wordnet
+from utils import remove_phrases, remove_sets, avoid
 
 class SpyBot(object):
     """
@@ -110,15 +110,36 @@ class Paul(SpyBot):
         self.their_words -= guess_set
 
         self.given_words.add(clue_word)
-        print(give_words)
     
 
     def getClue(self, invalid_words):
-        mind_word = random.sample(self.my_words, 1)
-        print(mind_word)
+        synonym_set = set()
 
-        # TODO remove   
-        print(self.my_words)
-        print
-        return ('paul' ,1)
+        # Keep thinking until one has an idea
+        while len(synonym_set) < 1:
+            
+            # Select one word to focus on
+            mind_word = random.sample(self.my_words, 1)[0] 
+
+            # Find similar words
+            synonyms = wordnet.synsets(mind_word)
+            for syn in synonyms:
+               synonym_set.add(syn.lemmas()[0].name().lower())
+            # Ensure they are valid
+            synonym_set = remove_sets(synonym_set, \
+                                    [invalid_words, self.my_words, self.their_words])
+            synonym_set = remove_phrases(synonym_set)
+        assert(len(synonym_set) > 0)
+
+        # Make selection based on dissimilarity to bad word
+        current_best_word = avoid(self.bad_word, synonym_set)    
+        word = current_best_word 
+
+        # Ensure selection is still similar to answer
+        if word in synonym_set:
+            synonym_set.remove(word)
+        else:
+            word = synonym_set.pop()
+
+        return (word.lower() ,1)
 
